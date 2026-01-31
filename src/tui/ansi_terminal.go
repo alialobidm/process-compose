@@ -764,9 +764,8 @@ func (t *AnsiTerminal) GetCell(x, y int) Cell {
 		return Cell{Char: ' ', Style: tcell.StyleDefault}
 	}
 
-	// Calculate adjusted Y position based on viewOffset
+	// Calculate adjusted Y position based on `viewOffset`
 	// viewOffset = 0 -> bottom (live)
-	// viewOffset > 0 -> looking up into history
 
 	if t.viewOffset == 0 {
 		if y >= 0 && y < t.height && x >= 0 && x < t.width {
@@ -790,7 +789,6 @@ func (t *AnsiTerminal) GetCell(x, y int) Cell {
 		}
 	} else {
 		// Index into history
-		// history index = len(history) + logicalRow
 		historyIndex := len(t.history) + logicalRow
 		if historyIndex >= 0 && historyIndex < len(t.history) {
 			line := t.history[historyIndex]
